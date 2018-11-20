@@ -9,15 +9,8 @@ stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
-                sh 'docker build .'
-            }
-            post {
-                success {
-                    echo 'Now Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
+                sh 'docker build . -t tomcatwebapp:${env_BUILD_ID}'
             }
         }
-
     }
 }
