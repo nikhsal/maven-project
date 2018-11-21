@@ -33,7 +33,7 @@ node {
             app.push("latest")
         }
         stage('Deploy') {
-            sh 'docker run -p 8080:8090 nik0904/devops:latest'
+            sh 'docker run -p 8090:8080 nik0904/devops:latest'
         }
     }
 }
