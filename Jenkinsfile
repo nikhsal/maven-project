@@ -9,7 +9,14 @@ stages{
         stage('Build'){
             steps {
                 sh "mvn clean package"
-                sh "docker build . -t tomcatwebapp:${env.BUILD_ID}"
+                 app = docker.build("nik0904/dockerdevops")
+            }
+        }
+        stage('Push'){
+            steps {
+                docker.withRegistry('https://hub.docker.com/r/nik0904/dockerdevops/','docker-hub-credentials')
+                app.push("${env.BUILD_NUMBER}")
+                app.push("latest")
             }
         }
     }
